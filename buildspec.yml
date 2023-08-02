@@ -1,15 +1,53 @@
 version: 0.2
 
-phases:
-  install:
-    runtime-versions:
-      java: corretto17
-  pre_build:
-    commands:
-      - echo "Installing Maven..."
-      - apt-get -y update
-      - apt-get -y install maven
-  build:
-    commands:
-      - echo "Building with Maven..."
-      - mvn -B package --file pom.xml
+pipelines:
+  MyJavaAppPipeline:
+    pipelineExecutionId: $PIPELINE_EXECUTION_ID
+    roleArn: arn:aws:iam::123456789012:role/CodePipelineServiceRole
+    artifactBucket: pipeline-205
+    stages:
+      - name: Source
+        actions:
+          - name: SourceAction
+            actionType:
+              category: Source
+              owner: ThirdParty
+              provider: GitHub
+              version: 1
+            configuration:
+              Owner: 2015u058
+              Repo: https://github.com/2015u058/demo-spring-boot
+              Branch: main
+              OAuthToken: !Ref GitHubToken
+            outputArtifacts:
+              - Name: SourceOutput
+      - name: Build
+        actions:
+          - name: BuildAction
+            actionType:
+              category: Build
+              owner: AWS
+              provider: CodeBuild
+              version: 1
+            configuration:
+              ProjectName: MyJavaAppCodeBuildProject
+            inputArtifacts:
+              - Name: SourceOutput
+            outputArtifacts:
+              - Name: BuildOutput
+      - name: Deploy
+        actions:
+          - name: DeployAction
+            actionType:
+              category: Deploy
+              owner: AWS
+              provider: CodeDeploy
+              version: 1
+            configuration:
+              ApplicationName: MyJavaAppCodeDeployApp
+              DeploymentGroupName: MyJavaAppDeploymentGroup
+              DeploymentConfig: CodeDeployDefault.OneAtATime
+              S3Bucket: my-codedeploy-appspec-bucket
+              S3Key: appspec.yml
+            inputArtifacts:
+              - Name: BuildOutput
