@@ -1,8 +1,8 @@
 version: 0.0
 os: linux
 files:
-  - source: target/cicd-0.0.1-SNAPSHOT.jar
-    destination: /opt/kljdsjf/cicd-0.0.1-SNAPSHOT.jar
+  - source: s3://pipeline-205/cicd-0.0.1-SNAPSHOT.jar
+    destination: ec2-65-0-31-120.ap-south-1.compute.amazonaws.com
 hooks:
   ApplicationStop:
     - location: scripts/stop_application.sh
