@@ -11,4 +11,4 @@ phases:
   build:
     commands:
       - echo "Building with Maven..."
-      - mvn -B package --file pom.xml
+      - mvn clean verify -DskipTests
