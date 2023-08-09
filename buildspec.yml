@@ -17,3 +17,9 @@ phases:
     commands:
       - echo "Pushing artifacts to S3 bucket..."
       - aws s3 cp target/cicd-0.0.1-SNAPSHOT.jar s3://pipeline-205/
+artifacts:
+  files:
+    - target/*.jar
+    - scripts/*.sh
+    - appspec.yml
+  discard-paths: yes
