@@ -5,10 +5,10 @@ files:
     destination: /opt/kljdsjf/cicd-0.0.1-SNAPSHOT.jar
 hooks:
   ApplicationStop:
-    - location: scripts/stop_application.sh
+    - location: stop_application.sh
       timeout: 180
       runas: ec2-user
   AfterInstall:
-    - location: scripts/start_application.sh
+    - location: start_application.sh
       timeout: 180
       runas: ec2-user
