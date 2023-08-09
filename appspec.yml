@@ -3,12 +3,12 @@ os: linux
 files:
   - source: target/cicd-0.0.1-SNAPSHOT.jar
     destination: /opt/kljdsjf/cicd-0.0.1-SNAPSHOT.jar
-hooks:
-  ApplicationStop:
-    - location: scripts/stop_application.sh
-      timeout: 180
-      runas: ec2-user
-  AfterInstall:
-    - location: scripts/start_application.sh
-      timeout: 180
-      runas: ec2-user
+#hooks:
+#  ApplicationStop:
+#    - location: scripts/stop_application.sh
+#      timeout: 180
+#      runas: ec2-user
+#  AfterInstall:
+#    - location: scripts/start_application.sh
+#      timeout: 180
+#      runas: ec2-user
