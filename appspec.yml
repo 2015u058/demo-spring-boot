@@ -1,8 +1,8 @@
 version: 0.0
 os: linux
 files:
-  - source: cicd-0.0.1-SNAPSHOT.jar
-    destination: /opt/kljdsjf/cicd-0.0.1-SNAPSHOT.jar
+  - source: ./cicd-0.0.1-SNAPSHOT.jar
+    destination: /opt/kljdsjf/
 file_exists_behavior: OVERWRITE
 hooks:
   ApplicationStop:
