@@ -45,10 +45,19 @@ jobs:
     - name: Build with Maven
       run: |
         mvn clean verify -DskipTests
+        
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.AWS_REGION }}
+
+    - name: deploy
+      run: |
         scp target/cicd-0.0.1-SNAPSHOT.jar ec2-user@13.126.29.187:/path/to/destination
         ssh ec2-user@13.126.29.187
         java -jar cicd-0.0.1-SNAPSHOT.jar > loyalty.out &
-
    # - name: Copy files to EC2 instance
    #   uses: appleboy/scp-action@master
    #   with:
