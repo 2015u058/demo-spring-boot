@@ -62,7 +62,7 @@ jobs:
         key: ${{ secrets.EC2_SSH_KEY }}
 
     - name: Set up SSH
-      run: echo "$SSH_PRIVATE_KEY" > ~/.ssh/vriddhi.pem && chmod 600 ~/.ssh/vriddhi.pem
+      run: echo "$EC2_SSH_KEY" > ~/.ssh/vriddhi.pem && chmod 600 ~/.ssh/vriddhi.pem
 
     - name: Java CI with Maven
       uses: actions/checkout@v3
