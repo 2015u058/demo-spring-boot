@@ -63,7 +63,5 @@ jobs:
     - name: Deploy to EC2
       id: ec2-deploy
       run: |
-        mkdir demo
-        cd demo
         mvn clean verify
         
