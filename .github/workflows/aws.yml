@@ -70,8 +70,10 @@ jobs:
 
     - name: SSH into EC2 and run deployment script
       run: |
-        ssh -i ~/.ssh/vriddhi.pem ubuntu@${{ secrets.EC2_HOST }} 'bash -s' <<EOF
+        ssh -i ~/.ssh/vriddhi.pem -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} 'bash -s' <<EOF
+        cd /remote/path/app
         EOF
+
           
     - name: Java CI with Maven
       uses: actions/checkout@v3
