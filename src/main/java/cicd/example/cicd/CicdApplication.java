@@ -15,7 +15,7 @@ public class CicdApplication {
 
 	@RequestMapping("/hello")
 	public String hello() {
-		return "Hello ekansh rathiji thank u bhai";
+		return "Hello shubham bhai";
 
 	}
 }
